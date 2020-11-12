@@ -1,4 +1,4 @@
-class tictactoe
+class TicTacToe
 
   WIN_COMBINATIONS = [
     [0, 1, 2],
@@ -8,7 +8,7 @@ class tictactoe
     [1, 4, 7],
     [2, 5, 8],
     [0, 4, 8],
-    [2, 4, 6]
+    [6, 4, 2]
   ]
 
 def initialize
@@ -16,11 +16,11 @@ def initialize
 end
 
 def display_board
-  puts " #{@board[0]} | #{@board[1]} | #{[@board[2]} "
+  puts " #{@board[0]} | #{@board[1]} | #{@board[2]} "
   puts "-----------"
-  puts " #{@board[3]} | #{@board[4]} | #{[@board[5]} "
+  puts " #{@board[3]} | #{@board[4]} | #{@board[5]} "
   puts "-----------"
-  puts " #{@board[6]} | #{@board[7]} | #{[@board[8]} "
+  puts " #{@board[6]} | #{@board[7]} | #{@board[8]} "
 end
 
 def input_to_index(user_input)
@@ -32,7 +32,7 @@ def move(index, current_player = "X")
 end
 
 def position_taken?(index)
-  !(@board[index].nil || @boards[index] == " ")
+  !(@board[index].nil? || @board[index] == " ")
 end
 
 def valid_move?(index)
@@ -50,6 +50,7 @@ def turn_count
 end
 
 def current_player
+  #if the turn count is an even number, that means O just went, so the next/current player is X
   num_turns = turn_count
   if num_turns % 2 == 0
     player = "X"
@@ -59,7 +60,7 @@ def current_player
   return player
 end
 
-def turn_count
+def turn
   puts "Please choose a number 1-9:"
   user_input = gets.chomp
   index = input_to_index(user_input)
@@ -68,7 +69,7 @@ def turn_count
     move(index, player_token)
     display_board
   else
-    turn_count
+    turn
   end
 end
 
@@ -82,7 +83,7 @@ def won?
     position_2 = @board[index_1]
     position_3 = @board[index_2]
 
-    if position_1 == "X" && position_2 == "X" && poistion_3 == "X"
+    if position_1 == "X" && position_2 == "X" && position_3 == "X"
       return win_combo
     elsif position_1 == "O" && position_2 == "O" && position_3 == "O"
       return win_combo
@@ -96,14 +97,7 @@ def full?
 end
 
 def draw?
-  if !won? || draw?
-    return true
-  end
-    return false
-  end
-end
-def over?
-  if won? || draw?
+  if !won? && full?
     return true
   else
     return false
@@ -132,7 +126,7 @@ def winner
   end
 end
 
-def player
+def play
   until over? == true
     turn
   end
@@ -142,4 +136,6 @@ def player
   elsif draw?
     puts "Game!"
   end
+end
+
 end
