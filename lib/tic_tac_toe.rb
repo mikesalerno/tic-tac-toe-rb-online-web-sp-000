@@ -58,3 +58,27 @@ def current_player
   end
   return player
 end
+
+def turn_count
+  puts "Please choose a number 1-9:"
+  user_input = gets.chomp
+  index = input_to_index(user_input)
+  if valid_move?(index)
+    player_token = current_player
+    move(index, player_token)
+    display_board
+  else
+    turn_count
+  end
+end
+
+def won?
+  WIN_COMBINATIONS.each {|win_combo|
+    index_0 = win_combo[0]
+    index_1 = win_combo[1]
+    index_2 = win_combo[2]
+
+    position_1 = @board[index_0]
+    position_2 = @board[index_1]
+    position_3 = @board[index_2] 
+  }
