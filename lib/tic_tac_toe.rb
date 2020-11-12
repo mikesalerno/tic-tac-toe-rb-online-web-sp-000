@@ -81,4 +81,66 @@ def won?
     position_1 = @board[index_0]
     position_2 = @board[index_1]
     position_3 = @board[index_2]
+
+    if position_1 == "X" && position_2 == "X" && poistion_3 == "X"
+      return win_combo
+    elsif position_1 == "O" && position_2 == "O" && position_3 == "O"
+      return win_combo
+    end
   }
+  return false
+end
+
+def full?
+  @board.all? {|index| index == "X" || index == "O"}
+end
+
+def draw?
+  if !won? || draw?
+    return true
+  end
+    return false
+  end
+end
+def over?
+  if won? || draw?
+    return true
+  else
+    return false
+  end
+end
+
+def over?
+  if won? || draw?
+    return true
+  else
+    return false
+  end
+end
+
+def winner
+  index = []
+  index = won?
+  if index == false
+    return nil
+  else
+    if @board[index[0]] == "X"
+      return "X"
+    else
+      return "O"
+    end
+  end
+end
+
+def player
+  until over? == true
+    turn
+  end
+
+  if won?
+    puts "Congratulations #{winner}!"
+  elsif draw?
+    puts "Game!"
+  end
+end
+
