@@ -143,4 +143,3 @@ def player
     puts "Game!"
   end
 end
-
